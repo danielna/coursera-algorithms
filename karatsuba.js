@@ -9,22 +9,30 @@
 
     var Karatsuba = function(n1, n2) {
         console.log("MULTIPLY " + n1 + " AND " + n2);
+
+        n1 = n1.toString().split("");
+        n2 = n2.toString().split("");
+        
         var product = this.multiply(n1, n2);
         console.log("final product:", product);
     };
 
     Karatsuba.prototype.multiply = function(n1, n2){
-        var nLength = n1.toString().length;
         console.log("n1: ", n1, ", n2: ", n2);
 
-        if ((Math.abs(n1)/10 < 1) && (Math.abs(n2)/10 < 1)) {
-            return n1 * n2;
+        if ((n1.length === 1) && (n2.length === 1)) {
+            return parseInt(n1[0], 10) * parseInt(n2[0], 10);
         }
 
         var a = this.splitFirstHalf(n1),
             b = this.splitSecondHalf(n1),
             c = this.splitFirstHalf(n2),
             d = this.splitSecondHalf(n2);
+
+        console.log("a", a);
+        console.log("b", b);
+        console.log("c", c);
+        console.log("d", d);
 
         var ac, ad, bc, bd;
 
@@ -33,23 +41,27 @@
         bc = this.multiply(b, c);
         bd = this.multiply(b, d);
 
-        return Math.pow(10,nLength)*(ac) + Math.pow(10,nLength/2)*(ad + bc) + bd;        
+        return Math.pow(10,n1.length)*(ac) + Math.pow(10,n1.length/2)*(ad + bc) + bd;        
     };
 
     Karatsuba.prototype.splitFirstHalf = function(n){
-        var nString = n.toString();
-            nLength = nString.length;
-        return parseInt(nString.substring(0, nLength/2), 10);
+        if (hasOddLength(n)) {
+            n.unshift("0");
+        }
+        
+        return n.slice(0, n.length/2);
     };
 
     Karatsuba.prototype.splitSecondHalf = function(n){
-        var nString = n.toString();
-            nLength = nString.length;
-        return parseInt(nString.substring(nLength/2, nLength), 10);
+        return n.slice(n.length/2, n.length);
     };
 
-    var num1 = 1234,
-        num2 = 5678;
+    var hasOddLength = function(array) {
+        return array.length%2 !== 0;
+    };
+
+    var num1 = 123456,
+        num2 = 123456;
 
     var product = new Karatsuba(num1, num2);
     
