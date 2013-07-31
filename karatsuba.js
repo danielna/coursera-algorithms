@@ -14,11 +14,12 @@
         n2 = n2.toString().split("");
         
         var product = this.multiply(n1, n2);
-        console.log("final product:", product);
+        
+        console.log("Final product:", product);
     };
 
     Karatsuba.prototype.multiply = function(n1, n2){
-        console.log("n1: ", n1, ", n2: ", n2);
+        // console.log("n1: ", n1, ", n2: ", n2);
 
         if ((n1.length === 1) && (n2.length === 1)) {
             return parseInt(n1[0], 10) * parseInt(n2[0], 10);
@@ -29,10 +30,10 @@
             c = this.splitFirstHalf(n2),
             d = this.splitSecondHalf(n2);
 
-        console.log("a", a);
-        console.log("b", b);
-        console.log("c", c);
-        console.log("d", d);
+        // console.log("a", a);
+        // console.log("b", b);
+        // console.log("c", c);
+        // console.log("d", d);
 
         var ac, ad, bc, bd;
 
@@ -60,8 +61,8 @@
         return array.length%2 !== 0;
     };
 
-    var num1 = 123456,
-        num2 = 123456;
+    var num1 = 1234,
+        num2 = 5678;
 
     var product = new Karatsuba(num1, num2);
     
