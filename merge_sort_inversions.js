@@ -12,16 +12,15 @@
     xhr.open('GET', '/input/PS1.txt', false);
     xhr.send(null);
 
-    // convert the STRINGS to INTEGERS
-    // dammit this was non-obvious
+    // Convert the STRINGS to INTEGERS
     var arrayString = xhr.responseText.split('\n');
     var array = [];
     for(var x in arrayString) {
         array.push(parseInt(arrayString[x], 10));
     }
 
-    // should be 11
     // var array = [6, 4, 3, 1, 5, 3, 5];
+    // #inversion of above test array: 11
     var inversions = 0;
 
     var mergeSort = function(array){
@@ -32,16 +31,11 @@
             return array;
         }
         var arraySplit1 = array.slice(0, length/2),
-            arraySplit2 = array.slice(length/2, array.length);
+            arraySplit2 = array.slice(length/2, array.length),
+            sortedArray1 = mergeSort(arraySplit1),
+            sortedArray2 = mergeSort(arraySplit2);
 
-        // console.log("arraySplit1:", arraySplit1);
-        // console.log("arraySplit2:", arraySplit2);
-
-        var sortedArray1 = mergeSort(arraySplit1);
-        var sortedArray2 = mergeSort(arraySplit2);
-
-        mergedArray = mergeArrays(sortedArray1, sortedArray2, length);
-        return mergedArray;
+        return mergeArrays(sortedArray1, sortedArray2, length);
     };
 
     var mergeArrays = function(arr1, arr2, length){
@@ -49,15 +43,7 @@
             i = 0,
             j = 0;
 
-        // console.log("MERGE:");
-        // console.log("arr1:", arr1);
-        // console.log("arr2:", arr2);  
-
         for (var n = 0; n < length; n++){
-            // console.log("i:", i);
-            // console.log("j:", j);
-            // console.log("arr[i]:", arr1[i]);
-            // console.log("arr[j]:", arr2[j]);
             if ((arr1[i] <= arr2[j]) || (typeof arr2[j] === "undefined")) {
                 if (typeof arr1[i] !== "undefined") {
                     mergedArray.push(arr1[i]);
@@ -71,10 +57,8 @@
                 }
             }
         }
-        // console.log("MERGED:", mergedArray);
         return mergedArray;
     };
-
 
     console.log("initialArray:", array);
     var output = mergeSort(array);
