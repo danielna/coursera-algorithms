@@ -7,7 +7,6 @@
     // 1. Halve recursively, base case 1 element
     // 2. As you pop the stack, merge elements.
 
-
     // Load the contents of PS1.txt
     var xhr = new XMLHttpRequest();
     xhr.open('GET', '/input/PS1.txt', false);
