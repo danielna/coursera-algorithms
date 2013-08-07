@@ -33,12 +33,6 @@
 
     var partition = function(array, leftIndex, rightIndex) {
 
-        // console.log("** RECURSE **");
-        // console.log("leftIndex:", leftIndex);
-        // console.log("rightIndex:", rightIndex);
-        // console.log("array subsection:", array.slice(leftIndex, rightIndex));
-        // console.log("************");
-
         if (leftIndex < rightIndex-1) {
             var pivot = array[leftIndex],
                 i = leftIndex + 1;
@@ -49,8 +43,6 @@
                     var temp = array[j];
                     array[j] = array[i];
                     array[i] = temp;
-                    // console.log("swap - j:", j, " + a[j]:", array[j], " & i:", i, " + a[i]:", array[i]);
-                    // console.log("post-swap array:", array);
                     i++;
                 }
             }
@@ -59,13 +51,10 @@
             array[leftIndex] = array[i-1];
             array[i-1] = pivot;
 
-            // console.log("array end:", array.slice(leftIndex, rightIndex));
-
             partition(array, leftIndex, i);
             partition(array, i, rightIndex);
             
         } else {
-            // console.log("return: ", array.slice(leftIndex, rightIndex), "\n");
             return array.slice(leftIndex, rightIndex);
         }
     };
