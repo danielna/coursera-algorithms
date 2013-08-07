@@ -43,20 +43,10 @@
             comparisons += (rightIndex - 1) - leftIndex;
 
             // Problem 2 edit:
-            // when making pivot the last item
-            // console.log("\n");
-            // console.log("array", array);
-            
-            // var _temp = array[leftIndex];
-            // array[leftIndex] = array[rightIndex-1];
-            // array[rightIndex-1] = _temp;
-
-            // console.log("SWAP");
-            // console.log("array[leftIndex]", array[leftIndex]);
-            // console.log("array[rightIndex-1]", array[rightIndex-1]);
-            // console.log("array.slice", array.slice(leftIndex, rightIndex));
-
-            // debugger;
+            // Pivot on the last item
+            var _temp = array[leftIndex];
+            array[leftIndex] = array[rightIndex-1];
+            array[rightIndex-1] = _temp;
 
             var pivot = array[leftIndex],
                 i = leftIndex + 1;
@@ -74,9 +64,6 @@
             // Move pivot to its correct place
             array[leftIndex] = array[i-1];
             array[i-1] = pivot;
-
-            // console.log("pivot at " + (i-1) + " and = " + pivot);
-            // console.log("end array:", array.slice(leftIndex, rightIndex));
 
             partition(array, leftIndex, i-1);
             partition(array, i, rightIndex);
