@@ -25,6 +25,7 @@
         array.push(parseInt(arrayString[x], 10));
     }
 
+    var PROBLEM_NUMBER = 3;
     var comparisons = 0;
 
     // var array = [3,8,2,5,1,4,7,6];
@@ -42,13 +43,7 @@
         if (leftIndex < rightIndex-1) {
             comparisons += (rightIndex - 1) - leftIndex;
 
-            // Problem 2 edit:
-            // Pivot on the last item
-            var _temp = array[leftIndex];
-            array[leftIndex] = array[rightIndex-1];
-            array[rightIndex-1] = _temp;
-
-            var pivot = array[leftIndex],
+            var pivot = getPivot(array, leftIndex, rightIndex, PROBLEM_NUMBER),
                 i = leftIndex + 1;
 
             for (var j = i; j < rightIndex; j++) {
@@ -75,6 +70,34 @@
 
             return array.slice(leftIndex, rightIndex);
         }
+    };
+
+    var getPivot = function(array, leftIndex, rightIndex, problemNumber){
+        if (problemNumber === 2){
+            swap(array, leftIndex, rightIndex);
+        }
+        if (problemNumber === 3){
+            var midIndex = Math.floor((rightIndex-1 - leftIndex)/2) + leftIndex,
+                mid = array[midIndex],
+                left = array[leftIndex],
+                right = array[rightIndex-1];
+
+            // mid is middle
+            if ((mid > right && mid < left) || (mid < right && mid > left)) {
+                swap(array, leftIndex, midIndex + 1);
+            // right is middle
+            } else if ((right > mid && right < left) || (right < mid && right > left)) {
+                swap(array, leftIndex, rightIndex);
+            }
+        }
+
+        return array[leftIndex];
+    };
+
+    var swap = function(array, pos1, pos2){
+        var _temp = array[pos1];
+        array[pos1] = array[pos2-1];
+        array[pos2-1] = _temp;
     };
 
     var sorted = quickSort(array);
