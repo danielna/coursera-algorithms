@@ -7,7 +7,7 @@
     // This is a horrible description
     //
     // With random pivot selection, should be O(nlogn)
-    // Worst case pivot selection (first item in an already sorted array) is O(n^2)
+    // Worst case pivot selection (first item in an already sorted array) is O(n^2) -- very rare
 
     var array = [3,8,2,5,1,4,7,6];
     // var array = [3,5,2,1,4];
@@ -19,14 +19,9 @@
     };
 
     var partition = function(array, leftIndex, rightIndex) {
-        
-        console.log("** RECURSE **");
-        console.log("array:", array);
-        console.log("leftIndex:", leftIndex);
-        console.log("rightIndex:", rightIndex);
-        console.log("************");
-        var hasSwapped = false;
 
+        // Adding this in so the recursion doesn't go farther than it needs to
+        var hasSwapped = false;
 
         if (leftIndex < rightIndex) {
             var pivot = array[leftIndex],
@@ -34,7 +29,7 @@
 
             for (var j = i; j < rightIndex; j++) {
                 if (array[j] < pivot) {
-                    // swap
+                    // Swap
                     var temp = array[j];
                     array[j] = array[i];
                     array[i] = temp;
@@ -45,10 +40,11 @@
                 }
             }
 
+            // Move pivot to its correct place
             array[leftIndex] = array[i-1];
             array[i-1] = pivot;
 
-            console.log("array:", array);
+            // console.log("array:", array);
             if (hasSwapped) {
                 partition(array, 0, i-1);
                 partition(array, i, rightIndex);
